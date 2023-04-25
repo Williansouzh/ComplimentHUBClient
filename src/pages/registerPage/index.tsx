@@ -2,9 +2,14 @@ import { useState } from "react";
 import { Button } from "../../components/button";
 import { Input } from "../../components/input";
 import * as C from "./styles";
-import { RegisterState } from "../../types/StatesTypes";
+import { RegisterNewUser } from "../../types/StatesTypes";
+import { api } from "../../api";
+import { useNavigate } from "react-router-dom";
+import { Modal } from "../../components/modal";
 export const RegisterPage = () => {
-  const [registerState, setRegisterState] = useState<RegisterState>({
+  const [showModal, setShowModal] = useState(false);
+  const navigate = useNavigate();
+  const [registerState, setRegisterState] = useState<RegisterNewUser>({
     name: "",
     age: "",
     post: "",
@@ -13,6 +18,21 @@ export const RegisterPage = () => {
     confirmPassword: "",
   });
   //functions
+
+  const onSubmitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    try {
+      await api.registerNewUser(registerState);
+      setShowModal(true);
+
+      setTimeout(() => {
+        navigate("/");
+      }, 1000);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const handleChangeRegister = (
     event: React.ChangeEvent<HTMLInputElement>,
     key: string
@@ -24,6 +44,12 @@ export const RegisterPage = () => {
   };
   return (
     <C.Container>
+      {showModal && (
+        <Modal
+          message="Account created with sucess"
+          onClick={() => setShowModal(false)}
+        />
+      )}
       <C.LeftSide>
         <C.NewUser>
           <h1 className="text-primary">{registerState.name}</h1>
@@ -33,7 +59,7 @@ export const RegisterPage = () => {
         </C.NewUser>
       </C.LeftSide>
       <C.RightSide>
-        <C.Form>
+        <C.Form onSubmit={onSubmitHandler}>
           <h1>Hello</h1>
           <p>Sing up to get started</p>
           <Input

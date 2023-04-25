@@ -8,3 +8,8 @@ export type InpuType = {
   type: string;
   placeholder?: string;
 };
+
+export type ModalType = {
+  message: string;
+  onClick: () => void;
+};

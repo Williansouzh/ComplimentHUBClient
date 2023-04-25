@@ -1,4 +1,4 @@
-export type RegisterState = {
+export type RegisterNewUser = {
   name: string;
   age: string;
   post: string;
