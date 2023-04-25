@@ -7,9 +7,10 @@ export type InpuType = {
   value?: string | number;
   type: string;
   placeholder?: string;
+  className?: string;
 };
 
 export type ModalType = {
   message: string;
-  onClick: () => void;
+  onClick?: () => void;
 };

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "../../components/button";
 import { Input } from "../../components/input";
 import * as C from "./styles";
@@ -7,7 +7,12 @@ import { api } from "../../api";
 import { useNavigate } from "react-router-dom";
 import { Modal } from "../../components/modal";
 export const RegisterPage = () => {
-  const [showModal, setShowModal] = useState(false);
+  const [showModal, setShowModal] = useState({
+    showModal: false,
+    message: "Example",
+  });
+  const [passwordError, setPasswordError] = useState(false);
+
   const navigate = useNavigate();
   const [registerState, setRegisterState] = useState<RegisterNewUser>({
     name: "",
@@ -16,20 +21,54 @@ export const RegisterPage = () => {
     email: "",
     password: "",
     confirmPassword: "",
+    passwordMatch: false,
   });
+  useEffect(() => {
+    if (registerState.password === registerState.confirmPassword) {
+      setRegisterState((prevState) => ({
+        ...prevState,
+        passwordMatch: true,
+      }));
+      setPasswordError(false);
+    } else {
+      setRegisterState((prevState) => ({
+        ...prevState,
+        passwordMatch: false,
+      }));
+      setPasswordError(true);
+    }
+  }, [registerState.password, registerState.confirmPassword]);
   //functions
 
   const onSubmitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    try {
-      await api.registerNewUser(registerState);
-      setShowModal(true);
-
-      setTimeout(() => {
-        navigate("/");
-      }, 1000);
-    } catch (error) {
-      console.log(error);
+    if (
+      registerState.name !== "" &&
+      registerState.age !== "" &&
+      registerState.email !== "" &&
+      registerState.post !== ""
+    ) {
+      if (!passwordError) {
+        try {
+          await api.registerNewUser(registerState);
+          setShowModal({
+            ...showModal,
+            showModal: true,
+            message: "Your account has created with sucess :)",
+          });
+          setTimeout(() => {
+            navigate("/");
+          }, 1800);
+        } catch (error) {
+          console.log(error);
+        }
+      }
+    } else {
+      setShowModal({
+        ...showModal,
+        showModal: true,
+        message: "fill in all the data",
+      });
     }
   };
 
@@ -44,10 +83,10 @@ export const RegisterPage = () => {
   };
   return (
     <C.Container>
-      {showModal && (
+      {showModal.showModal && (
         <Modal
-          message="Account created with sucess"
-          onClick={() => setShowModal(false)}
+          message={showModal.message}
+          onClick={() => setShowModal({ ...showModal, showModal: false })}
         />
       )}
       <C.LeftSide>
@@ -99,6 +138,7 @@ export const RegisterPage = () => {
               handleChangeRegister(event, "password");
             }}
             placeholder="Password"
+            className={passwordError ? "err" : ""}
           />
           <Input
             type="password"
@@ -107,6 +147,7 @@ export const RegisterPage = () => {
               handleChangeRegister(event, "confirmPassword");
             }}
             placeholder="Confirm Password"
+            className={passwordError ? "err" : ""}
           />
           <Button primary text="Login" />
         </C.Form>

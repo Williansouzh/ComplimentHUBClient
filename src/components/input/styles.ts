@@ -8,4 +8,7 @@ export const Input = styled.input`
   padding: 1em;
   margin-bottom: 1em;
   border-radius: 1em;
+  &.err {
+    border: 2px solid red;
+  }
 `;

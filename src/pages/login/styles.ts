@@ -29,11 +29,16 @@ export const Form = styled.form`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  a {
+  .link {
+    text-align: center;
+  }
+  p {
+    cursor: pointer;
     text-decoration: none;
     color: black;
     font-weight: bold;
     text-align: center;
     margin: 1em 0em;
+    text-align: left;
   }
 `;

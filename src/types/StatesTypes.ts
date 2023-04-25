@@ -5,4 +5,5 @@ export type RegisterNewUser = {
   email: string;
   password: string;
   confirmPassword: string;
+  passwordMatch?: boolean;
 };
