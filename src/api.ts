@@ -1,7 +1,8 @@
 import axios from "axios";
 import { RegisterNewUser } from "./types/StatesTypes";
+const apiURL = process.env.API_URL;
 const axiosInstance = axios.create({
-  baseURL: "http://localhost:4000/",
+  baseURL: apiURL,
   headers: {
     "content-type": "application/x-www-form-urlencoded;charset=utf-8",
   },
