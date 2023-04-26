@@ -92,6 +92,7 @@ export const RegisterPage = () => {
       <C.LeftSide>
         <C.NewUser>
           <h1 className="text-primary">{registerState.name}</h1>
+          <h1>env: {process.env.TEXT}</h1>
           <p>Email: {registerState.email} </p>
           <p>Age {registerState.age}</p>
           <p>Post: {registerState.post}</p>
