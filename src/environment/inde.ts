@@ -1,3 +1,3 @@
 export const Enviroment = {
-  BASE_URL: "https://complimenthubserver-production.up.railway.app/",
+  BASE_URL: "http://localhost:4000/",
 };

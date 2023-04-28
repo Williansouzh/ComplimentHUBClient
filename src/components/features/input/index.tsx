@@ -1,4 +1,4 @@
-import { InpuType } from "../../types/componentsTypes";
+import { InpuType } from "../../../types/componentsTypes";
 import * as C from "./styles";
 export const Input = ({
   type,

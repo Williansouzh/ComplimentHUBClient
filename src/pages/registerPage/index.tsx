@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
-import { Button } from "../../components/button";
-import { Input } from "../../components/input";
+import { Button } from "../../components/features/button";
+import { Input } from "../../components/features/input";
 import * as C from "./styles";
 import { RegisterNewUser } from "../../types/StatesTypes";
 import { api } from "../../api";
 import { useNavigate } from "react-router-dom";
-import { Modal } from "../../components/modal";
+import { Modal } from "../../components/features/modal";
 export const RegisterPage = () => {
   const [showModal, setShowModal] = useState({
     showModal: false,
@@ -104,14 +104,16 @@ export const RegisterPage = () => {
           <p>Sing up to get started</p>
           <Input
             value={registerState.name}
-            onChangeHandler={(event) => handleChangeRegister(event, "name")}
+            onChangeHandler={(event: React.ChangeEvent<HTMLInputElement>) =>
+              handleChangeRegister(event, "name")
+            }
             type="text"
             placeholder="Name"
           />
           <Input
             type="number"
             value={registerState.age}
-            onChangeHandler={(event) => {
+            onChangeHandler={(event: React.ChangeEvent<HTMLInputElement>) => {
               handleChangeRegister(event, "age");
             }}
             placeholder="Age"
@@ -119,7 +121,7 @@ export const RegisterPage = () => {
           <Input
             type="text"
             value={registerState.age}
-            onChangeHandler={(event) => {
+            onChangeHandler={(event: React.ChangeEvent<HTMLInputElement>) => {
               handleChangeRegister(event, "post");
             }}
             placeholder="Post"
@@ -127,7 +129,7 @@ export const RegisterPage = () => {
           <Input
             type="text"
             value={registerState.age}
-            onChangeHandler={(event) => {
+            onChangeHandler={(event: React.ChangeEvent<HTMLInputElement>) => {
               handleChangeRegister(event, "email");
             }}
             placeholder="Email"
@@ -135,7 +137,7 @@ export const RegisterPage = () => {
           <Input
             type="password"
             value={registerState.age}
-            onChangeHandler={(event) => {
+            onChangeHandler={(event: React.ChangeEvent<HTMLInputElement>) => {
               handleChangeRegister(event, "password");
             }}
             placeholder="Password"
@@ -144,7 +146,7 @@ export const RegisterPage = () => {
           <Input
             type="password"
             value={registerState.age}
-            onChangeHandler={(event) => {
+            onChangeHandler={(event: React.ChangeEvent<HTMLInputElement>) => {
               handleChangeRegister(event, "confirmPassword");
             }}
             placeholder="Confirm Password"

@@ -1,5 +1,5 @@
 import * as C from "./styles";
-import { ModalType } from "../../types/componentsTypes";
+import { ModalType } from "../../../types/componentsTypes";
 export const Modal = ({ message, onClick }: ModalType) => {
   return (
     <C.Modal>
