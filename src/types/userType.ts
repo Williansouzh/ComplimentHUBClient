@@ -4,6 +4,15 @@ export type UserType = {
     age: number;
     post: string;
     email: string;
-    password: string;
+    password?: string;
   };
 };
+
+export interface Employer {
+  name: string;
+  age: number;
+  post: string;
+  email: string;
+  password?: string;
+  id?: number;
+}

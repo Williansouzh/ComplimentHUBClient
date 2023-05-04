@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { api } from "../../api";
 import { Modal } from "../../components/features/modal";
 import { useDispatch } from "react-redux";
-import { setname } from "../redux/hooks/reducers/useReducer";
+import { setname } from "../../redux/hooks/reducers/useReducer";
 export const LoginPage = () => {
   const dispatch = useDispatch();
   const [errorLogin, setErrorlogin] = useState<boolean>(false);
@@ -20,6 +20,7 @@ export const LoginPage = () => {
     message: "Example",
   });
 
+  //teste>
   const navigate = useNavigate();
 
   //funcitons
@@ -38,8 +39,7 @@ export const LoginPage = () => {
     }
     try {
       const login = await api.login(loginState.email, loginState.password);
-      console.log(login, typeof login);
-      if (login) {
+      if (login.user) {
         dispatch(setname(login.user));
         navigate("/homepage");
       } else {
@@ -48,11 +48,9 @@ export const LoginPage = () => {
           showModal: true,
           message: "Email or password incorrect",
         });
-        console.log("Modal should be displayed now");
         setErrorlogin(true);
       }
     } catch (error) {
-      console.log("Email or password incorrect");
       console.log(error);
     }
   };

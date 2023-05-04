@@ -36,7 +36,7 @@ export const api = {
     } catch (error) {
       console.error(error);
       return {
-        status: true,
+        status: false,
       };
     }
   },
@@ -47,6 +47,6 @@ export const api = {
         Authorization: `Bearer ${token}`,
       },
     });
-    return response.data.list;
+    return response.data.response;
   },
 };

@@ -1,39 +1,66 @@
 import { useEffect, useState } from "react";
 import { Dashboard } from "../../components/features/dashboard";
 import { Header } from "../../components/header";
-import { useAppSelector } from "../redux/hooks/useAppSelectors";
+import { useAppSelector } from "../../redux/hooks/useAppSelectors";
 import * as C from "./styles";
-import { UserType } from "../../types/userType";
+import { Modal } from "../../components/features/modal";
+import { useNavigate } from "react-router-dom";
+import { CreateComplimnet } from "../../components/features/createCompliment";
+import { Employer } from "../../types/userType";
+import { api } from "../../api";
+import { useDispatch } from "react-redux";
 
 export const HomePage = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const user = useAppSelector((state) => state.user);
-  //set showmodal when user isn´t logged
+
   const [showModal, setShowModal] = useState({
     showModal: false,
-    message: "Example",
+    message: "example",
   });
 
-  //useEffect to check user logged
+  const [employers, setEmployers] = useState<Employer[]>([]);
+
   useEffect(() => {
-    if (!user.user) {
-      console.log(user.user);
-      setShowModal({
-        ...showModal,
-        showModal: false,
-        message: "You are disconnected",
-      });
-    } else {
-      setShowModal({
-        ...showModal,
-        showModal: true,
-        message: "You are disconnected",
-      });
+    async function updateScreen() {
+      const updatedEmployers = await api.list();
+      setEmployers(updatedEmployers);
+
+      if (user.user && user.user.email !== "") {
+        setShowModal({
+          ...showModal,
+          showModal: false,
+        });
+      } else {
+        setShowModal({
+          ...showModal,
+          showModal: true,
+          message: "You are disconnected!!",
+        });
+      }
     }
+
+    updateScreen();
   }, [user.user]);
+
   return (
     <C.Container>
       <>
+        {showModal.showModal ? (
+          <Modal
+            message={showModal.message}
+            onClick={() => {
+              navigate("/");
+              setShowModal({
+                ...showModal,
+                showModal: false,
+              });
+            }}
+          />
+        ) : null}
         <Header user={user.user} />
+        <CreateComplimnet />
         <Dashboard />
       </>
     </C.Container>
