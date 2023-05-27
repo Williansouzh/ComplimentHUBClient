@@ -39,7 +39,7 @@ export const LoginPage = () => {
     }
     try {
       const login = await api.login(loginState.email, loginState.password);
-      if (login.user) {
+      if (login.status) {
         dispatch(setname(login.user));
         navigate("/homepage");
       } else {
@@ -48,6 +48,7 @@ export const LoginPage = () => {
           showModal: true,
           message: "Email or password incorrect",
         });
+        console.log(login.status);
         setErrorlogin(true);
       }
     } catch (error) {

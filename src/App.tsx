@@ -2,7 +2,6 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { LoginPage } from "./pages/login";
 import { RegisterPage } from "./pages/registerPage";
 import { HomePage } from "./pages/homePage";
-import { CreateComplimnet } from "./components/features/createCompliment";
 function App() {
   return (
     <BrowserRouter>

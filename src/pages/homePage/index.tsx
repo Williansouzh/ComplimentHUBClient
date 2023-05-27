@@ -6,14 +6,14 @@ import * as C from "./styles";
 import { Modal } from "../../components/features/modal";
 import { useNavigate } from "react-router-dom";
 import { CreateComplimnet } from "../../components/features/createCompliment";
-import { Employer } from "../../types/userType";
+import { Employer, UserType } from "../../types/userType";
 import { api } from "../../api";
 import { useDispatch } from "react-redux";
 
 export const HomePage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const user = useAppSelector((state) => state.user);
+  const user: UserType = useAppSelector((state) => state.user);
 
   const [showModal, setShowModal] = useState({
     showModal: false,
@@ -38,6 +38,7 @@ export const HomePage = () => {
           showModal: true,
           message: "You are disconnected!!",
         });
+        console.log(user.user, user);
       }
     }
 

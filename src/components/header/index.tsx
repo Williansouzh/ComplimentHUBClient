@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 export const Header = ({ user }: UserType) => {
   const navigate = useNavigate();
 
-  const userlogged = useAppSelector((state) => state.user);
+  const userlogged = useAppSelector((state) => state.user.user);
   const dispatch = useDispatch();
 
   const logout = async () => {
@@ -33,11 +33,11 @@ export const Header = ({ user }: UserType) => {
             <div className="img" />
           </div>
           <div>
-            <p className="profileName">{user.name}</p>
+            <p className="profileName">{userlogged.name}</p>
             <p>
-              {user.age} - {user.post}
+              {userlogged.age} - {userlogged.post}
             </p>
-            <p>{user.email}</p>
+            <p>{userlogged.email}</p>
           </div>
         </C.ProfileImg>
         <button onClick={logout}>Log out</button>
