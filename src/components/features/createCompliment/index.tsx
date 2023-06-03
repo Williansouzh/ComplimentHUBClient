@@ -8,7 +8,7 @@ import { Button } from "../button";
 export const CreateComplimnet = () => {
   //get employers logged
   const [employers, setEmployers] = useState<Employer[]>([]);
-
+  const [complimentText, setComplimentText] = useState("");
   useEffect(() => {
     async function fetchEmployers() {
       const response = await api.list();
@@ -20,7 +20,13 @@ export const CreateComplimnet = () => {
 
   return (
     <C.Container>
-      <textarea required cols={20} rows={10} />
+      <textarea
+        required
+        cols={20}
+        rows={10}
+        value={complimentText}
+        onChange={(e) => setComplimentText(e.target.value)}
+      />
       <div className="buttonsContainer">
         <div>
           <legend>Compliment:</legend>

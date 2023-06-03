@@ -49,4 +49,10 @@ export const api = {
     });
     return response.data.response;
   },
+  //compliments
+  listCompliments: async () => {
+    const response = await axiosInstance.get("/compliments");
+    console.log("Resposta API: ", response.data);
+    return response.data.compliments;
+  },
 };

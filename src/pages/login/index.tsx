@@ -41,7 +41,7 @@ export const LoginPage = () => {
       const login = await api.login(loginState.email, loginState.password);
       if (login.status) {
         dispatch(setname(login.user));
-        navigate("/homepage");
+        navigate("/homepage/compliments");
       } else {
         setShowModal({
           ...showModal,
