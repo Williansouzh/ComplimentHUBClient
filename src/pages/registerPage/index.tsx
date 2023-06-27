@@ -23,6 +23,20 @@ export const RegisterPage = () => {
     confirmPassword: "",
     passwordMatch: false,
   });
+
+  /*const uploadImage = async (file: File): Promise<void> => {
+    try {
+      const formData = new FormData();
+      formData.append("imagem", file);
+
+      await api.uploadImage(formData);
+
+      console.log("Imagem enviada com sucesso!");
+    } catch (error) {
+      console.error("Erro ao enviar a imagem:", error);
+    }
+  };*/
+
   useEffect(() => {
     if (registerState.password === registerState.confirmPassword) {
       setRegisterState((prevState) => ({
@@ -39,7 +53,16 @@ export const RegisterPage = () => {
     }
   }, [registerState.password, registerState.confirmPassword]);
   //functions
-
+  /*const handleFileChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ): void => {
+    const file = event.target.files?.[0];
+    if (file) {
+      uploadImage(file);
+      console.log("uploaded image");
+    }
+    console.log("Not uploaded image");
+  };*/
   const onSubmitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (
@@ -60,7 +83,7 @@ export const RegisterPage = () => {
             navigate("/");
           }, 1800);
         } catch (error) {
-          console.log(error);
+          console.log("Error SubmitHandler:", error);
         }
       }
     } else {

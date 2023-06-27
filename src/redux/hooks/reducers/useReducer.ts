@@ -9,6 +9,7 @@ export const slice = createSlice({
       post: "",
       email: "",
       password: "",
+      picture: "",
     },
   },
   reducers: {

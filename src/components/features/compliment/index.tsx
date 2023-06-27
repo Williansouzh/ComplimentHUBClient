@@ -1,6 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import * as C from "./styles";
 import { complimentType } from "../../../types/complimentType";
+
+import { FaUserCircle, FaUserAstronaut } from "react-icons/fa";
+import { LikePost } from "../likeComponent";
 
 interface ComplimentProps {
   compliment: complimentType;
@@ -11,7 +14,7 @@ export const Compliment: React.FC<ComplimentProps> = ({ compliment }) => {
     <C.Container>
       <div className="usersInformations">
         <C.User>
-          <div className="userProfilePhoto"></div>
+          <FaUserCircle className="userProfilePhoto" />
           <div className="userInformations">
             <p>{compliment.sender}</p>
             <p>{compliment.department}</p>
@@ -23,10 +26,15 @@ export const Compliment: React.FC<ComplimentProps> = ({ compliment }) => {
             <p>{compliment.receiver}</p>
             <p>{compliment.department}</p>
           </div>
-          <div className="userProfilePhoto"></div>
+          <FaUserAstronaut className="userProfilePhoto--receiver" />
         </C.User>
       </div>
       <div className="complimentText">{compliment.compliment}</div>
+      <LikePost
+        deslikes={compliment.likes ?? 0}
+        likes={compliment.likes ?? 0}
+        id={compliment.id ?? 0}
+      />
     </C.Container>
   );
 };

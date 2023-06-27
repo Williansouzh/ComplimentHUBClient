@@ -2,6 +2,7 @@ import axios from "axios";
 import { RegisterNewUser } from "./types/StatesTypes";
 import { Enviroment } from "./environment/inde";
 import { UserType } from "./types/userType";
+import { complimentType } from "./types/complimentType";
 
 const axiosInstance = axios.create({
   baseURL: Enviroment.BASE_URL as string,
@@ -29,9 +30,10 @@ export const api = {
       const { token, status, user } = response.data;
       localStorage.setItem("token", token);
       console.error(status);
+      console.log("url da imagem");
       return {
         status: true,
-        user,
+        user: { ...user },
       };
     } catch (error) {
       console.error(error);
@@ -49,10 +51,37 @@ export const api = {
     });
     return response.data.response;
   },
+  uploadImage: async (formData: FormData) => {
+    await axiosInstance.post("/register", formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
+  },
   //compliments
   listCompliments: async () => {
     const response = await axiosInstance.get("/compliments");
     console.log("Resposta API: ", response.data);
     return response.data.compliments;
+  },
+  createNewCompliment: async (compliment: complimentType) => {
+    await axiosInstance.post("/addcompliment", {
+      compliment: compliment.compliment,
+      date: compliment.date,
+      department: compliment.department,
+      id: compliment.id,
+      receiver: compliment.receiver,
+      sender: compliment.sender,
+    });
+  },
+  addLike: async (id: number, liked: boolean) => {
+    try {
+      await axiosInstance.put("/likepost", {
+        id: id,
+        liked: liked,
+      });
+    } catch (error) {
+      console.log("Error to generate like API ", error);
+    }
   },
 };

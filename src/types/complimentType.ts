@@ -1,8 +1,10 @@
 export type complimentType = {
-  id: number;
+  id?: number;
   sender: string;
   receiver: string;
   compliment: string;
-  date: string;
+  date?: number | string;
   department: string;
+  likes?: number;
+  deslikes?: number;
 };

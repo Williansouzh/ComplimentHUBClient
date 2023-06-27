@@ -5,7 +5,7 @@ import { useAppSelector } from "../../redux/hooks/useAppSelectors";
 import * as C from "./styles";
 import { Modal } from "../../components/features/modal";
 import { useNavigate } from "react-router-dom";
-import { CreateComplimnet } from "../../components/features/createCompliment";
+import { CreateCompliment } from "../../components/features/createCompliment";
 import { Employer, UserType } from "../../types/userType";
 import { api } from "../../api";
 import { useDispatch } from "react-redux";
@@ -32,6 +32,8 @@ export const HomePage = () => {
           ...showModal,
           showModal: false,
         });
+
+        console.log("user: ", user);
       } else {
         setShowModal({
           ...showModal,
@@ -61,7 +63,6 @@ export const HomePage = () => {
           />
         ) : null}
         <Header user={user.user} />
-        <CreateComplimnet />
         <Dashboard />
       </>
     </C.Container>

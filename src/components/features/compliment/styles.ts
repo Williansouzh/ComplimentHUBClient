@@ -17,11 +17,13 @@ export const Container = styled.div`
   .complimentText {
     background-color: #d9d9d9;
     width: 100%;
+    word-wrap: break-word;
     padding: 1em;
   }
 `;
 
 export const User = styled.div`
+  color: black;
   display: flex;
   justify-content: center;
   flex-grow: 1;
@@ -34,9 +36,14 @@ export const User = styled.div`
     width: 2.4em;
     height: 2.4em;
     border-radius: 50%;
-    background-color: red;
   }
   .userInformations {
     margin: 0em 1em;
+  }
+  .userProfilePhoto--receiver {
+    width: 2.4em;
+    height: 2.4em;
+    border-radius: 50%;
+    color: crimson;
   }
 `;

@@ -1,6 +1,7 @@
 export type ButtonType = {
   text: string;
   primary?: boolean;
+  onClick?: () => void;
 };
 export type InpuType = {
   onChangeHandler?: (event: React.ChangeEvent<HTMLInputElement>) => void;

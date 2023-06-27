@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const Container = styled.div`
   margin: 1em auto;
   background-color: #d9d9d9;
-  width: 50%;
+  width: 100%;
   padding: 1em;
   textarea {
     padding: 1em;

@@ -19,19 +19,18 @@ export const Header = ({ user }: UserType) => {
           post: "",
           email: "",
           password: "",
+          picture: "",
         },
       })
     );
-
+    console.log(userlogged);
     navigate("/");
   };
   return (
     <C.Header>
       <C.Nav>
         <C.ProfileImg>
-          <div className="img-container">
-            <div className="img" />
-          </div>
+          <div className="img-container"></div>
           <div>
             <p className="profileName">{userlogged.name}</p>
             <p>
